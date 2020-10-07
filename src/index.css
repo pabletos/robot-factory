@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Mono:wght@500&display=swap');
+
+body {
+  margin: 0;
+  width: 100%;
+  background-color: var(--main-bg);
+  font-family: 'Roboto', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-shadow: 1px 1px 2px #000000;
+}
+
+h2 {
+  font-family: 'Roboto Mono', monospace;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+:root {
+  --main-bg: #30b6ff;
+  --primary: #cc2b66;
+  --secondary: #3d2dd0;
+  --tertiary: #28C96E;
+  --main-txt: white;
+  --primary-shadow: #cc2b66;
+  --secondary-shadow: #cc2b66;
+  --tertiary-shadow: #28c96e;
+}
+

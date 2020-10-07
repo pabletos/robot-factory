@@ -1,0 +1,61 @@
+div.upgrade {
+    display: flex;
+    background-color: var(--main-txt);
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+    border-radius: 10px;
+    width: 350px;
+    padding: 0 1rem;
+}
+
+div.upgrade.active {
+    filter: grayscale(100%);
+}
+
+div.upgrade > div.upgrade-img {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+div.upgrade > div.upgrade-img > img{
+    height: 96px;
+    width: 90px;
+}
+
+div.upgrade > div.upgrade-body {
+    padding: 1rem;
+    padding-bottom: 0;
+    padding-left: 2rem;
+}
+
+div.upgrade > div.upgrade-body > div.title {
+    text-align: center;
+    font-family: 'Roboto Mono', monospace;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+    font-size: 1.2rem;
+}
+
+div.upgrade > div.upgrade-body > div.price {
+    text-align: center;
+    font-family: 'Roboto Mono', monospace;
+    margin-bottom: 0.5rem;
+    color: var(--tertiary);
+    font-size: 1.2rem;
+    text-shadow: none;
+}
+
+
+div.upgrade > div.upgrade-body > div.desc {
+    text-shadow: none;
+} 
+
+div.upgrade > div.upgrade-body > div.btn-buy {
+    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 10rem;
+}

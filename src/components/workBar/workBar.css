@@ -1,0 +1,22 @@
+div.work-bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+div.robot-counter {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+div.robot-counter h2 {
+    margin: 0;
+    color: var(--main-txt)
+}
+
+div.robot-counter .total {
+    font-size: 1.5rem;
+    color: var(--tertiary);
+}

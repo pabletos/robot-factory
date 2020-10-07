@@ -1,0 +1,22 @@
+div.money-bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+div.money-counter {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+div.money-counter h2 {
+    margin: 0;
+    color: var(--main-txt)
+}
+
+div.money-counter .total {
+    font-size: 1.5rem;
+    color: var(--tertiary);
+}

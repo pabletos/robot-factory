@@ -1,0 +1,59 @@
+div.candidate-card {
+    width: 250px;
+    height: 350px;
+    padding-bottom: 0.5rem;
+    text-align: center;
+    color: var(--main-txt);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.5);
+}
+div.candidate-card > h2 {
+    text-shadow: 2px 2px 4px #000000;
+    font-size: 1.2rem;
+}
+div.candidate-card > img {
+    width: 100px;
+    background: var(--main-txt);
+    border-radius: 50%;
+}
+div.candidate-card > p {
+    padding: 0 20px;
+    font-style: italic;
+    width: 210px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 60px;
+}
+
+div.candidate-card div.title {
+    color: var(--tertiary);
+    font-size: 1.1rem;
+    padding: 1rem 0;
+    font-family: 'Roboto Mono', monospace;
+}
+
+div.candidate-card div.cost {
+    font-size: 1.2rem;
+    color: var(--tertiary);
+    margin-top: 1rem;
+}
+
+div.candidate-card ul.stats {
+    list-style: none;
+    margin: 0;
+    padding: 0 0.5rem;
+}
+
+div.candidate-card ul.stats li{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.2rem;
+}
+
+div.candidate-card ul.stats li > progress{
+    width: 50%;
+}
+
+div.candidate-card:nth-child(even) {background: var(--primary)}
+div.candidate-card:nth-child(odd) {background: var(--primary)}
