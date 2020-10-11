@@ -1,14 +1,17 @@
 import React from 'react';
+import SuspenseImage from '../suspenseImage/suspenseImage';
 import './candidateCard.css';
 
 function CandidateCard(props) {
     const { robot } = props;
     return (
-        <div data-id={robot.id} className="candidate-card" draggable="true" onDragStart={props.onDragStart}>
+        <div data-id={robot.id} className="candidate-card slide-bottom" draggable="true" onDragStart={props.onDragStart}>
             <h2>
                 { robot.name } { robot.surname }
             </h2>
-            <img alt={robot.name} src={ robot.imageUrl } draggable="false"/>
+            {//<img alt={robot.name} src={ robot.imageUrl } draggable="false"/>
+            }
+            <SuspenseImage alt={robot.name} src={ robot.imageUrl } draggable="false"/>
             {/*<p>{ robot.desc }</p>*/}
             <div className="body">
                 <div className="title">{  robot.specialization.title }</div>

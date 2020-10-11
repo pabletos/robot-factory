@@ -47,6 +47,10 @@ function MainPage(props) {
     const [isFunctionsActive, setFunctionsActive] = useState(false);
 
     useEffect(() => {
+
+    }, [])
+
+    useEffect(() => {
         const interval = setInterval(() => {
           setAssembled(assembled => {
             if (isIndustrialActive && assemblySecAmount > 0) {
@@ -63,6 +67,19 @@ function MainPage(props) {
         return () => clearInterval(interval);
       }, [assemblySecAmount, isIndustrialActive, isLogisticsActive, cashPerRobot, minAssemblySell]);
 
+    const loadData = (data) => {
+        setAssembled(data.assembled);
+        setAssemblyClickAmount(data.assemblyClickAmount);
+        setIndustrial(data.isIndustrialActive);
+        setMinAssemblySell(data.minAssemblySell);
+        setLogistics(data.isLogisticsActive);
+        setCash(data.cash);
+        setCashPerRobot(data.cashPerRobot);
+        setCandidatesPrice(data.candidatesPrice);
+        setCandidatesQuality(data.candidatesQuality);
+        setFunctionsActive(data.isFunctionsActive);
+    }
+    
     const onClickAssemble = () => {
         setAssembled(assembled + assemblyClickAmount);
     }
@@ -93,13 +110,79 @@ function MainPage(props) {
             if (cash >= robot.cost) {
                 const newStaff = Object.assign({}, staff);
                 newStaff[position] = robot;
-                setStaff(newStaff);
+                onChangeStaff(newStaff, position, robot.stats[position]);
                 setCash(cash => cash - robot.cost);
                 setCandidates(candidates => candidates.filter((cand) => cand.id !== id))
+
             } else {
                 alert('Not enough cash');
             }
         }
+    }
+
+    const onChangeStaff = (newStaff, position, posStats) => {
+        let value = Math.floor(posStats.value * 10);
+        switch (position) {
+            case 'hrDirector':
+                switch (posStats.type) {
+                    case 'quality':
+                        setCandidatesQuality(base.candidatesQuality + (base.candidatesQuality * value / 10));
+                        setCandidatesNumber(base.candidatesNumber);
+                        setCandidatesPrice(base.candidatesPrice);
+                        break;
+                    case 'quantity':
+                        setCandidatesNumber(base.candidatesNumber + value);
+                        setCandidatesPrice(base.candidatesPrice);
+                        setCandidatesQuality(base.candidatesQuality);
+                        break;
+                    case 'price':
+                        setCandidatesPrice(Math.floor(base.candidatesPrice - (base.candidatesPrice * value / 10)));
+                        setCandidatesQuality(base.candidatesQuality);
+                        setCandidatesNumber(base.candidatesNumber);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 'rChief':
+                switch (posStats.type) {
+                    case 'quantityClick':
+                        setAssemblyClickAmount(value);
+                        setAssemblySecAmount(base.assemblySecAmount);
+                        break;
+                    case 'quantitySec':
+                        setAssemblySecAmount(value);
+                        setAssemblyClickAmount(base.assemblyClickAmount);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 'ceo':
+                switch (posStats.type) {
+                    case 'price':
+                        setCashPerRobot(Math.floor(base.cashPerRobot + (base.cashPerRobot * value / 10)));
+                        break;
+                    case 'upgDto':
+                        setCashPerRobot(base.cashPerRobot);
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 'transport':
+                switch (posStats.type) {
+                    case 'quantity':
+                        setMinAssemblySell(Math.floor(base.minAssemblySell - (base.minAssemblySell * value / 10)))
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            default:
+                break;
+        }
+        setStaff(newStaff);
     }
 
     const onDragCandidateOver = (event) => {
@@ -134,7 +217,12 @@ function MainPage(props) {
 
     const buyCandidates = () => {
         if (cash >= candidatesPrice) {
-            setCandidates(generateRobots(candidatesNumber, candidatesQuality));
+            if (candidates.length > 0) {
+                setCandidates([]);
+                setTimeout(() => setCandidates(generateRobots(candidatesNumber, candidatesQuality)), 10);
+            } else {
+                setCandidates(generateRobots(candidatesNumber, candidatesQuality));
+            }
             setCash(oldCash => oldCash - candidatesPrice);
         }
     }
@@ -207,7 +295,7 @@ function MainPage(props) {
                     break;
             }
             return (
-                <div className="functions-bar">
+                <div className="functions-bar slide-in-right">
                     <ul className="tabs" role="nav">
                         <li data-tab="1" className={activeTab === 1 ? "tab active" : "tab"} onClick={changeTab}>Upgrades</li>
                         { upgrades.rr.active && 

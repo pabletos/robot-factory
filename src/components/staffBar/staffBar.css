@@ -9,6 +9,7 @@ div.staff-bar {
     justify-content: center;
     overflow: auto;
     flex-wrap: wrap;
+    padding-bottom: 0;
 }
 
 div.staff-bar h3 {
@@ -57,4 +58,10 @@ div.staff-item .staff-slot > img {
     margin: 5px;
     background: var(--main-txt);
     border-radius: 50%;
+}
+
+div.staff-item > div.ability {
+    margin-top: 0.8rem;
+    min-height: 2.1rem;
+    width: 9rem;
 }

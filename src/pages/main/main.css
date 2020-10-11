@@ -1,6 +1,7 @@
 div.game-wrapper {
     max-width: 1000px;
     margin: auto;
+    perspective: 500px;
 }
 
 div.upg-container {
@@ -23,6 +24,9 @@ div.cand-container {
     overflow: auto;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     row-gap: 50px;
+    perspective: 500px;
+    overflow: hidden;
+    min-height: 360px;
 }
 
 div.mainBar {

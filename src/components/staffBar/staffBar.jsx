@@ -1,9 +1,11 @@
 import React from 'react';
+import STRINGS from '../../utils/strings';
+import SuspenseImage from '../suspenseImage/suspenseImage';
 import './staffBar.css';
 
 function StaffBar(props) {
     return(
-        <div className={"staff-bar"}>
+        <div className="staff-bar slide-in-left">
             <div className="staff-item" onDrop={(e) => props.onDrop(e, 'hrDirector')} onDragOver={props.onDragOver}>
                 <h3>RR Director</h3>
                 {props.hrDirector ? 
@@ -13,7 +15,14 @@ function StaffBar(props) {
                 }
                 <div className="staff-slot">
                     { props.hrDirector &&
-                        <img alt="Robot Resources Director" src={ props.hrDirector.imageUrl }></img>
+                        <SuspenseImage alt="Robot Resources Director" src={ props.hrDirector.imageUrl }></SuspenseImage>
+                    }
+                </div>
+                <div className="ability">
+                    { props.hrDirector ?
+                        STRINGS['TYPES']['hrDirector'][props.hrDirector.stats.hrDirector.type].replace('${v}', Math.floor(props.hrDirector.stats.hrDirector.value * 10)) 
+                        :
+                        ''
                     }
                 </div>
             </div>
@@ -26,7 +35,14 @@ function StaffBar(props) {
                 }
                 <div className="staff-slot">
                     { props.rChief &&
-                        <img alt="Robotting Chief" src={ props.rChief.imageUrl }></img>
+                        <SuspenseImage alt="Robotting Chief" src={ props.rChief.imageUrl }></SuspenseImage>
+                    }
+                </div>
+                <div className="ability">
+                    { props.rChief ?
+                        STRINGS['TYPES']['rChief'][props.rChief.stats.rChief.type].replace('${v}', Math.floor(props.rChief.stats.rChief.value * 10)) 
+                        :
+                        ''
                     }
                 </div>
             </div>
@@ -39,7 +55,14 @@ function StaffBar(props) {
                 }
                 <div className="staff-slot">
                     { props.ceo &&
-                        <img alt="Seller Master" src={ props.ceo.imageUrl }></img>
+                        <SuspenseImage alt="Seller Master" src={ props.ceo.imageUrl }></SuspenseImage>
+                    }
+                </div>
+                <div className="ability">
+                    { props.ceo ?
+                        STRINGS['TYPES']['ceo'][props.ceo.stats.ceo.type].replace('${v}', Math.floor(props.ceo.stats.ceo.value * 10)) 
+                        :
+                        ''
                     }
                 </div>
             </div>
@@ -52,7 +75,14 @@ function StaffBar(props) {
                 }
                 <div className="staff-slot">
                     { props.transport &&
-                        <img alt="Transport Tycoon" src={ props.transport.imageUrl }></img>
+                        <SuspenseImage alt="Transport Tycoon" src={ props.transport.imageUrl }></SuspenseImage>
+                    }
+                </div>
+                <div className="ability">
+                    { props.transport ?
+                        STRINGS['TYPES']['transport'][props.transport.stats.transport.type].replace('${v}', Math.floor(props.transport.stats.transport.value * 10)) 
+                        :
+                        ''
                     }
                 </div>
             </div>
