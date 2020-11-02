@@ -98,11 +98,11 @@ function MainPage(props) {
     }
 
     const onDragCandidateCard = (event) => {
-        console.log(event.target.dataset.id)
         event.dataTransfer.setData("robotId", event.target.dataset.id);
     }
 
     const onDropCandidateCard = (event, position) => {
+        console.log(position)
         event.preventDefault();
         const id = parseInt(event.dataTransfer.getData("robotId"));
         if (id) {
@@ -121,6 +121,7 @@ function MainPage(props) {
     }
 
     const onChangeStaff = (newStaff, position, posStats) => {
+        console.log(newStaff, position, posStats)
         let value = Math.floor(posStats.value * 10);
         switch (position) {
             case 'hrDirector':
