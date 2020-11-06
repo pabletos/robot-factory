@@ -8,21 +8,22 @@ import Upgrade from '../../components/upgrade/upgrade';
 import { getQuotes, generateRobots } from '../../utils/generation';
 
 function MainPage(props) {
+    const MIN_FUNCTIONS_CASH = 5;
+    const base = {
+        candidatesQuality: 0.5,
+        candidatesPrice: 10,
+        assemblyClickAmount: 1,
+        assemblySecAmount: 1,
+        minAssemblySell: 5,
+        cashPerRobot: 5,
+        candidatesNumber: 3
+    }
     const [upgrades, setUpgrades] = useState({
         staff: {name: 'Robo-leaders', active: false, img: 'https://vignette.wikia.nocookie.net/brawlstars/images/c/cf/Robo_Rumble.png/revision/latest/scale-to-width-down/340?cb=20200304181912', desc: 'Unlocks the Staff menu.', quote: '', price: 0},
         rr: {name: 'Robot Resources', active: false, img: 'https://vignette.wikia.nocookie.net/brawlstars/images/2/24/Boss_Fight.png/revision/latest/scale-to-width-down/90?cb=20181226162523', desc: 'Unlocks the Robot Resources department.', quote: '', price: 0},
         industrial: {name: 'Robot slavery', active: false, img: 'https://vignette.wikia.nocookie.net/brawlstars/images/e/e6/Takedown.png/revision/latest/scale-to-width-down/90?cb=20190919143710', desc: 'Produces robots every second (+1 without bonuses)', quote: '', price: 0},
         logistics: {name: 'Ludicrous profit', active: false, img: 'https://vignette.wikia.nocookie.net/brawlstars/images/1/1e/Gem_Grab.png/revision/latest/scale-to-width-down/90?cb=20200304181851', desc: 'Automatically sells when robot batch is ready.', quote: '', price: 0}
     })
-    const base = {
-        candidatesQuality: 0.5,
-        candidatesPrice: 10,
-        assemblyClickAmount: 1,
-        assemblySecAmount: 0,
-        minAssemblySell: 5,
-        cashPerRobot: 5,
-        candidatesNumber: 3
-    }
     const [candidates, setCandidates] = useState([]);
     const [staff, setStaff] = useState({
         hrDirector: null,
@@ -30,25 +31,29 @@ function MainPage(props) {
         ceo: null,
         transport: null
     })
-    const MIN_FUNCTIONS_CASH = 5;
-    const [assembled, setAssembled] = useState(0);
     const [assemblyClickAmount, setAssemblyClickAmount] = useState(base.assemblyClickAmount);
     const [assemblySecAmount, setAssemblySecAmount] = useState(base.assemblySecAmount);
-    const [isIndustrialActive, setIndustrial] = useState(false);
     const [minAssemblySell, setMinAssemblySell] = useState(base.minAssemblySell);
-    const [isLogisticsActive, setLogistics] = useState(false);
-    const [cash, setCash] = useState(0);
     const [cashPerRobot, setCashPerRobot] = useState(base.cashPerRobot);
-    const [processingTime, setProcessingTime] = useState(10);
-    const [activeTab, setActiveTab] = useState(1);
     const [candidatesPrice, setCandidatesPrice] = useState(base.candidatesPrice);
     const [candidatesQuality, setCandidatesQuality] = useState(base.candidatesQuality);
     const [candidatesNumber, setCandidatesNumber] = useState(base.candidatesNumber);
     const [isFunctionsActive, setFunctionsActive] = useState(false);
+    const [activeTab, setActiveTab] = useState(1);
+    const [cash, setCash] = useState(0);
+    const [isLogisticsActive, setLogistics] = useState(false);
+    const [isIndustrialActive, setIndustrial] = useState(false);
+    const [assembled, setAssembled] = useState(0);
 
     useEffect(() => {
-
+        if (localStorage.data) {
+            loadData(JSON.parse(localStorage.data));
+        }
     }, [])
+
+    useEffect(() => {
+        saveData();
+    })
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -70,6 +75,7 @@ function MainPage(props) {
     const loadData = (data) => {
         setAssembled(data.assembled);
         setAssemblyClickAmount(data.assemblyClickAmount);
+        setAssemblySecAmount(data.assemblySecAmount);
         setIndustrial(data.isIndustrialActive);
         setMinAssemblySell(data.minAssemblySell);
         setLogistics(data.isLogisticsActive);
@@ -78,10 +84,32 @@ function MainPage(props) {
         setCandidatesPrice(data.candidatesPrice);
         setCandidatesQuality(data.candidatesQuality);
         setFunctionsActive(data.isFunctionsActive);
+        setStaff(data.staff);
+        setUpgrades(data.upgrades);
+    }
+
+    const saveData = () => {
+        console.log('saving...')
+        const data = {
+            assembled,
+            assemblyClickAmount,
+            assemblySecAmount,
+            isIndustrialActive,
+            minAssemblySell,
+            isLogisticsActive,
+            cash,
+            cashPerRobot,
+            candidatesPrice,
+            candidatesQuality,
+            isFunctionsActive,
+            staff,
+            upgrades     
+        }
+        localStorage.setItem('data', JSON.stringify(data));
     }
     
     const onClickAssemble = () => {
-        setAssembled(assembled + assemblyClickAmount);
+        setAssembled(assembled => assembled + assemblyClickAmount);
     }
 
     const onClickSell = () => {
@@ -121,7 +149,6 @@ function MainPage(props) {
     }
 
     const onChangeStaff = (newStaff, position, posStats) => {
-        console.log(newStaff, position, posStats)
         let value = Math.floor(posStats.value * 10);
         switch (position) {
             case 'hrDirector':
