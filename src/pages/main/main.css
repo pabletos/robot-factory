@@ -118,3 +118,15 @@ div.btn.btn-generate {
     margin: auto;
     margin-top: 1rem;
 }
+
+@media screen and (max-width: 500px) {
+    div.mainBar {
+        margin: 0;
+    }
+    div.functions-bar {
+        margin: 2rem 0;
+    } 
+    div.staff-bar {
+        margin: 2rem 0;
+    }
+}

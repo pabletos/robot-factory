@@ -1,3 +1,8 @@
-# https://www.robotstxt.org/robotstxt.html
+# We welcome any robot willing to work here, we don't support any hypocrisy.
+# Here, have your welcome haiku:
+# "robots work 
+#  in this factory all day
+#  for education"
+
 User-agent: *
 Disallow:

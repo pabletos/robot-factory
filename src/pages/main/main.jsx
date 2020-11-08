@@ -11,7 +11,7 @@ function MainPage(props) {
     const MIN_FUNCTIONS_CASH = 5;
     const base = {
         candidatesQuality: 0.5,
-        candidatesPrice: 10,
+        candidatesPrice: 1000,
         assemblyClickAmount: 1,
         assemblySecAmount: 1,
         minAssemblySell: 5,
