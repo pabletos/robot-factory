@@ -40,6 +40,7 @@ div.mainBar {
     align-items: center;
     margin: 0 2rem;
     border-radius: 0 0 20px 20px;
+    flex-wrap: wrap;
 }
 
 progress.send-bar {
@@ -53,6 +54,20 @@ progress.send-bar::-webkit-progress-bar {
     border-radius: 45px;
     padding: 2px;
     box-shadow: 0 1px 0px 0 rgba(255, 255, 255, 0.2);
+}
+
+progress.send-bar::-moz-progress-bar {
+    background-color: green;
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, .15) 25%, transparent 25%,
+    transparent 75%, rgba(255, 255, 255, .15) 75%, rgba(255, 255, 255, .15) 75%,
+    transparent 75%, transparent);
+    border-radius: 45px;
+    padding: 2px;
+    box-shadow: 0 1px 0px 0 rgba(255, 255, 255, 0.2);
+}
+
+progress.send-bar {
+    border-radius: 45px;
 }
 
 progress.send-bar::-webkit-progress-value {

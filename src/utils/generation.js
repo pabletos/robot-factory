@@ -101,8 +101,8 @@ export const generateRobots = (quantity, quality) => {
             transport: {type: transportTypes[Math.floor(Math.random() * transportTypes.length)], value:  0.2 + (Math.random() * quality) * 0.8}
         }
         robot.stats[type].value += Math.random() * quality;
-        //robot.cost = Math.ceil((quality * 10000) + (Math.random() * (quality * 10000)));
-        robot.cost = 10;
+        robot.cost = Math.ceil((quality * 1000) + (Math.random() * (quality * 5000)));
+        //robot.cost = 10;
         robots.push(robot);
     }
     return robots;

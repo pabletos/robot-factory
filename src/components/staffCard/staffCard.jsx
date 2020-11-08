@@ -28,4 +28,4 @@ function StaffCard(props) {
     )
 }
 
-export default StaffCard;
+export default React.memo(StaffCard);

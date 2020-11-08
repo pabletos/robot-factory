@@ -107,5 +107,9 @@ div.candidate-card ul.stats li > progress{
     width: 50%;
 }
 
+div.candidate-card ul.stats li > progress::-moz-progress-bar {
+    background: green;
+}
+
 div.candidate-card:nth-child(even) {background: var(--primary)}
 div.candidate-card:nth-child(odd) {background: var(--primary)}

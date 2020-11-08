@@ -2,7 +2,7 @@ div.staff-item {
     display: flex;
     flex-direction: column;
     color: var(--main-txt);
-    justify-content: center;
+    justify-content: flex-start;
     text-align: center;
     align-items: center;
     padding: 1.5rem;
@@ -27,5 +27,5 @@ div.staff-item .staff-slot > img {
 div.staff-item > div.ability {
     margin-top: 0.8rem;
     min-height: 2.1rem;
-    width: 9rem;
+    width: 10rem;
 }

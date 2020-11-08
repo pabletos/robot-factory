@@ -19,10 +19,10 @@ function MainPage(props) {
         candidatesNumber: 3
     }
     const [upgrades, setUpgrades] = useState({
-        staff: {name: 'Robo-leaders', active: false, img: 'https://vignette.wikia.nocookie.net/brawlstars/images/c/cf/Robo_Rumble.png/revision/latest/scale-to-width-down/340?cb=20200304181912', desc: 'Unlocks the Staff menu.', quote: '', price: 0},
-        rr: {name: 'Robot Resources', active: false, img: 'https://vignette.wikia.nocookie.net/brawlstars/images/2/24/Boss_Fight.png/revision/latest/scale-to-width-down/90?cb=20181226162523', desc: 'Unlocks the Robot Resources department.', quote: '', price: 0},
-        industrial: {name: 'Robot slavery', active: false, img: 'https://vignette.wikia.nocookie.net/brawlstars/images/e/e6/Takedown.png/revision/latest/scale-to-width-down/90?cb=20190919143710', desc: 'Produces robots every second (+1 without bonuses)', quote: '', price: 0},
-        logistics: {name: 'Ludicrous profit', active: false, img: 'https://vignette.wikia.nocookie.net/brawlstars/images/1/1e/Gem_Grab.png/revision/latest/scale-to-width-down/90?cb=20200304181851', desc: 'Automatically sells when robot batch is ready.', quote: '', price: 0}
+        staff: {name: 'Robo-leaders', active: false, img: 'https://vignette.wikia.nocookie.net/brawlstars/images/c/cf/Robo_Rumble.png/revision/latest/scale-to-width-down/340?cb=20200304181912', desc: 'Unlocks the Staff menu.', quote: '', price: 100},
+        rr: {name: 'Robot Resources', active: false, img: 'https://vignette.wikia.nocookie.net/brawlstars/images/2/24/Boss_Fight.png/revision/latest/scale-to-width-down/90?cb=20181226162523', desc: 'Unlocks the Robot Resources department.', quote: '', price: 500},
+        industrial: {name: 'Robot slavery', active: false, img: 'https://vignette.wikia.nocookie.net/brawlstars/images/e/e6/Takedown.png/revision/latest/scale-to-width-down/90?cb=20190919143710', desc: 'Produces robots every second (+1 without bonuses)', quote: '', price: 5000},
+        logistics: {name: 'Ludicrous profit', active: false, img: 'https://vignette.wikia.nocookie.net/brawlstars/images/1/1e/Gem_Grab.png/revision/latest/scale-to-width-down/90?cb=20200304181851', desc: 'Automatically sells when robot batch is ready.', quote: '', price: 10000}
     })
     const [candidates, setCandidates] = useState([]);
     const [staff, setStaff] = useState({
@@ -86,6 +86,7 @@ function MainPage(props) {
         setFunctionsActive(data.isFunctionsActive);
         setStaff(data.staff);
         setUpgrades(data.upgrades);
+        setCandidatesNumber(data.candidatesNumber);
     }
 
     const saveData = () => {
@@ -103,7 +104,8 @@ function MainPage(props) {
             candidatesQuality,
             isFunctionsActive,
             staff,
-            upgrades     
+            upgrades,
+            candidatesNumber     
         }
         localStorage.setItem('data', JSON.stringify(data));
     }
@@ -130,7 +132,6 @@ function MainPage(props) {
     }
 
     const onDropCandidateCard = (event, position) => {
-        console.log(position)
         event.preventDefault();
         const id = parseInt(event.dataTransfer.getData("robotId"));
         if (id) {
@@ -224,6 +225,7 @@ function MainPage(props) {
                 newUpgrades[key].active = true;
                 return newUpgrades;
             })
+            setCash(cash => cash - upgrades[key].price);
             // Special features
             switch (key) {
                 case 'industrial':

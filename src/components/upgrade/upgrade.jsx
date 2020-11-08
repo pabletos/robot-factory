@@ -21,4 +21,4 @@ function Upgrade(props) {
     )
 }
 
-export default Upgrade;
+export default React.memo(Upgrade);
